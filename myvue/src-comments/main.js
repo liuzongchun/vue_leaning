@@ -3,8 +3,6 @@
 import Vue from 'vue'//引入vue
 import App from './App'//引入app
 
-import './base.css'
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
