@@ -1,9 +1,9 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <TodoHeader/>
-      <TodoList/>
-      <TodoFooter/>
+      <TodoHeader :addTodo="addTodo"/>
+      <TodoList :todos="todos" :deleteTodo="deleteTodo"/>
+      <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :selectAllTodos="selectAllTodos"/>
     </div>
   </div>
 </template>
@@ -15,6 +15,30 @@
     import TodoFooter from "./components/TodoFooter.vue";
 
     export default {
+        data() {
+            return {
+                todos: [
+                    {title: '吃饭', complete: false},
+                    {title: '睡觉', complete: true},
+                    {title: 'coding', complete: false}
+                ]
+            }
+        },
+        methods: {
+            addTodo(todo) {
+                this.todos.unshift(todo)
+            },
+            deleteTodo(index) {
+                this.todos.splice(index, 1)
+            },
+            deleteCompleteTodos() {
+                this.todos = this.todos.filter(todo => !todo.complete)
+
+            },
+            selectAllTodos(check) {
+                this.todos.forEach(todo => todo.complete = check)
+            }
+        },
         //映射标签
         components: {
             TodoHeader,
